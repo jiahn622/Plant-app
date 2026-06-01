@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plant Monitor - GitHub Pages QR Ready</title>
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #f7f7f5;
+      --charcoal: #1f1f1f;
+      --gray-900: #2b2b2b;
+      --gray-700: #666666;
+      --gray-500: #9a9a9a;
+      --gray-300: #dddddd;
+      --gray-200: #e8e8e8;
+      --gray-100: #f3f3f1;
+      --green: #4f7d5a;
+      --orange: #c9824a;
+      --blue: #4f6f8f;
+      --red: #9a3d3d;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+      --phone-width: 378px;
+      --phone-height: 780px;
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Pretendard, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #eeeeea 0%, #ffffff 45%, #ecece8 100%);
+      color: var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .page {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .intro {
+      padding: 10px;
+    }
+
+    .eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-700);
+      margin-bottom: 18px;
+    }
+
+    .intro h1 {
+      font-size: 52px;
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      margin-bottom: 22px;
+    }
+
+    .intro p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--gray-700);
+      max-width: 340px;
+      margin-bottom: 32px;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--gray-900);
+    }
+
+    .feature span {
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--charcoal);
+      display: inline-block;
+    }
+
+    .device-wrap {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .phone {
+      width: var(--phone-width);
+      height: var(--phone-height);
+      background: #111;
+      border-radius: 46px;
+      padding: 12px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      width: 112px;
+      height: 30px;
+      background: #111;
+      border-radius: 0 0 18px 18px;
+      left: 50%;
+      top: 12px;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    .screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 36px;
+      background: var(--white);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-header {
+      padding: 54px 24px 18px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px solid transparent;
+    }
+
+    .app-header h2 {
+      font-size: 28px;
+      letter-spacing: -0.05em;
+      font-weight: 760;
+    }
+
+    .app-header p {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .icon-button {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--gray-200);
+      background: var(--white);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .icon-button:hover {
+      background: var(--charcoal);
+      color: var(--white);
+    }
+
+    .content {
+      flex: 1;
+      padding: 0 24px 92px;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .content::-webkit-scrollbar {
+      display: none;
+    }
+
+    .summary-card {
+      border: 1px solid var(--gray-200);
+      background: var(--off-white);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      margin: 6px 0 22px;
+    }
+
+    .summary-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 26px;
+    }
+
+    .status-pill {
+      padding: 7px 11px;
+      border: 1px solid var(--gray-300);
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-900);
+      background: var(--white);
+    }
+
+    .big-number {
+      font-size: 62px;
+      letter-spacing: -0.07em;
+      line-height: 0.9;
+      font-weight: 780;
+    }
+
+    .unit {
+      font-size: 18px;
+      color: var(--gray-500);
+      margin-left: 2px;
+      letter-spacing: 0;
+    }
+
+    .label {
+      color: var(--gray-500);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .mini-metric {
+      border-top: 1px solid var(--gray-300);
+      padding-top: 14px;
+    }
+
+    .mini-metric strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .mini-metric span {
+      display: block;
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-top: 3px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gray-700);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 26px 0 12px;
+    }
+
+    .plant-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .plant-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: 0.2s ease;
+      background: var(--white);
+    }
+
+    .plant-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--charcoal);
+    }
+
+    .plant-card h3 {
+      font-size: 17px;
+      letter-spacing: -0.03em;
+      margin-bottom: 5px;
+    }
+
+    .plant-card p {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 99px;
+      background: var(--green);
+      margin-bottom: 7px;
+      margin-left: auto;
+    }
+
+    .dot.dry { background: var(--orange); }
+    .dot.wet { background: var(--blue); }
+
+    .card-value {
+      text-align: right;
+      font-weight: 760;
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .bottom-nav {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      height: 66px;
+      border: 1px solid var(--gray-200);
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(18px);
+      border-radius: 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+      z-index: 20;
+    }
+
+    .nav-item {
+      border: 0;
+      background: transparent;
+      color: var(--gray-500);
+      font-size: 11px;
+      display: grid;
+      gap: 5px;
+      place-items: center;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .nav-item.active {
+      color: var(--charcoal);
+      font-weight: 800;
+    }
+
+    .nav-icon {
+      width: 21px;
+      height: 21px;
+      display: grid;
+      place-items: center;
+    }
+
+    .view {
+      display: none;
+      height: 100%;
+      flex-direction: column;
+    }
+
+    .view.active {
+      display: flex;
+    }
+
+    .scan-screen {
+      background: var(--charcoal);
+      color: var(--white);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scan-header {
+      padding: 58px 24px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .scan-header h2 {
+      font-size: 27px;
+      letter-spacing: -0.05em;
+    }
+
+    .scan-header p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 5px;
+    }
+
+    .scan-area {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+    }
+
+    .qr-frame {
+      width: 246px;
+      height: 246px;
+      border: 1.5px solid rgba(255,255,255,0.72);
+      border-radius: 30px;
+      position: relative;
+    }
+
+    .qr-frame::before,
+    .qr-frame::after {
+      content: "";
+      position: absolute;
+      inset: 26px;
+      border-top: 1px solid rgba(255,255,255,0.25);
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .qr-frame::after {
+      transform: rotate(90deg);
+    }
+
+    .scan-line {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      top: 34px;
+      height: 2px;
+      background: rgba(255,255,255,0.9);
+      animation: scan 2.2s infinite ease-in-out;
+    }
+
+    @keyframes scan {
+      0%, 100% { transform: translateY(0); opacity: .35; }
+      50% { transform: translateY(170px); opacity: 1; }
+    }
+
+    .scan-button {
+      border: 0;
+      margin: 0 24px 34px;
+      height: 56px;
+      border-radius: 18px;
+      background: var(--white);
+      color: var(--charcoal);
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .back-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    .registered-card {
+      margin-top: 10px;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-xl);
+      padding: 28px 24px;
+      background: var(--off-white);
+    }
+
+    .check-mark {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: var(--charcoal);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      margin-bottom: 28px;
+    }
+
+    .registered-card h3 {
+      font-size: 31px;
+      letter-spacing: -0.06em;
+      margin-bottom: 8px;
+    }
+
+    .registered-card p {
+      color: var(--gray-500);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .info-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--gray-300);
+      padding: 14px 0 4px;
+      font-size: 14px;
+    }
+
+    .info-row span:first-child {
+      color: var(--gray-500);
+    }
+
+    .primary-btn {
+      width: 100%;
+      height: 56px;
+      border-radius: 18px;
+      border: 0;
+      background: var(--charcoal);
+      color: white;
+      font-family: inherit;
+      font-weight: 800;
+      margin-top: 18px;
+      cursor: pointer;
+    }
+
+    .secondary-btn {
+      width: 100%;
+      height: 56px;
+      border-radius: 18px;
+      border: 1px solid var(--gray-300);
+      background: var(--white);
+      color: var(--charcoal);
+      font-family: inherit;
+      font-weight: 800;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .gauge-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-xl);
+      background: var(--off-white);
+      padding: 22px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .gauge {
+      width: 190px;
+      height: 190px;
+      margin: 8px auto 18px;
+      border-radius: 50%;
+      background: conic-gradient(var(--green) 0deg 209deg, #e2e2df 209deg 360deg);
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .gauge::after {
+      content: "";
+      width: 146px;
+      height: 146px;
+      border-radius: 50%;
+      background: var(--off-white);
+      position: absolute;
+    }
+
+    .gauge-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .gauge-inner strong {
+      font-size: 46px;
+      letter-spacing: -0.07em;
+    }
+
+    .gauge-inner span {
+      display: block;
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 3px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .data-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      background: var(--white);
+    }
+
+    .data-card small {
+      color: var(--gray-500);
+      font-size: 12px;
+    }
+
+    .data-card strong {
+      display: block;
+      margin-top: 12px;
+      font-size: 25px;
+      letter-spacing: -0.05em;
+    }
+
+    .message-card {
+      margin-top: 14px;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      background: var(--charcoal);
+      color: white;
+    }
+
+    .message-card h4 {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .message-card p {
+      color: rgba(255,255,255,0.68);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .chart-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-xl);
+      background: var(--off-white);
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+
+    .chart-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .chart-head h3 {
+      font-size: 18px;
+      letter-spacing: -0.04em;
+    }
+
+    .chart-head span {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .line-chart {
+      height: 164px;
+      position: relative;
+      border-bottom: 1px solid var(--gray-300);
+      border-left: 1px solid var(--gray-300);
+      overflow: hidden;
+    }
+
+    .line-chart svg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .chart-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      font-size: 10px;
+      color: var(--gray-500);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .log-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .log-item {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--white);
+      font-size: 14px;
+    }
+
+    .log-item span {
+      color: var(--gray-500);
+      font-size: 12px;
+      display: block;
+      margin-top: 3px;
+    }
+
+
+
+    .plant-hero-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-xl);
+      background: var(--off-white);
+      overflow: hidden;
+      margin: 6px 0 16px;
+    }
+
+    .plant-hero-img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      background: #f2f2f0;
+    }
+
+    .plant-hero-info {
+      padding: 18px 20px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 14px;
+    }
+
+    .plant-hero-info h3 {
+      font-size: 23px;
+      letter-spacing: -0.05em;
+      margin-bottom: 6px;
+    }
+
+    .plant-hero-info p {
+      font-size: 12px;
+      color: var(--gray-500);
+      line-height: 1.5;
+    }
+
+    .plant-hero-status {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      border-radius: 99px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    @media (max-width: 860px) {
+      body {
+        align-items: flex-start;
+        padding: 24px 16px;
+      }
+      .page {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .intro {
+        text-align: left;
+        padding: 0;
+      }
+      .intro h1 {
+        font-size: 42px;
+      }
+      .intro p {
+        max-width: none;
+      }
+      .phone {
+        width: var(--phone-width);
+        height: var(--phone-height);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="device-wrap">
+      <div class="phone">
+        <div class="screen">
+          <div class="view active" id="homeView">
+            <header class="app-header">
+              <div>
+                <h2>My Plants</h2>
+                <p>3 plants connected</p>
+              </div>
+              <button class="icon-button" onclick="showView('scanView')" aria-label="QR 스캔">⌗</button>
+            </header>
+
+            <div class="content">
+              <section class="summary-card">
+                <div class="summary-top">
+                  <div>
+                    <div class="status-pill">All sensors normal</div>
+                  </div>
+                  <span style="font-size: 13px; color: var(--gray-500);">Today</span>
+                </div>
+                <div>
+                  <span class="big-number">48<span class="unit">%</span></span>
+                  <div class="label">Average soil moisture</div>
+                </div>
+                <div class="metric-row" style="margin-top: 28px;">
+                  <div class="mini-metric">
+                    <strong>23℃</strong>
+                    <span>Temperature</span>
+                  </div>
+                  <div class="mini-metric">
+                    <strong>46%</strong>
+                    <span>Humidity</span>
+                  </div>
+                  <div class="mini-metric">
+                    <strong>64%</strong>
+                    <span>Water tank</span>
+                  </div>
+                </div>
+              </section>
+
+              <div class="section-title">Registered Plants</div>
+              <div class="plant-list">
+                <article class="plant-card" onclick="selectPlant('basil')">
+                  <div>
+                    <h3>Basil</h3>
+                    <p>Moisture 58% · Optimal</p>
+                  </div>
+                  <div>
+                    <div class="dot"></div>
+                    <div class="card-value">58%</div>
+                  </div>
+                </article>
+                <article class="plant-card" onclick="selectPlant('cosmos')">
+                  <div>
+                    <h3>Cosmos</h3>
+                    <p>Moisture 31% · Dry</p>
+                  </div>
+                  <div>
+                    <div class="dot dry"></div>
+                    <div class="card-value">31%</div>
+                  </div>
+                </article>
+                <article class="plant-card" onclick="selectPlant('ivy')">
+                  <div>
+                    <h3>Ivy</h3>
+                    <p>Moisture 55% · Optimal</p>
+                  </div>
+                  <div>
+                    <div class="dot"></div>
+                    <div class="card-value">55%</div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div class="view" id="scanView">
+            <div class="scan-screen">
+              <header class="scan-header">
+                <div>
+                  <h2>QR Scan</h2>
+                  <p>화분 또는 캡슐의 QR을 맞춰주세요.</p>
+                </div>
+                <button class="back-btn" onclick="showView('homeView')">×</button>
+              </header>
+              <div class="scan-area">
+                <div class="qr-frame">
+                  <div class="scan-line"></div>
+                </div>
+              </div>
+              <button class="scan-button" onclick="showView('registeredView')">Simulate Scan</button>
+            </div>
+          </div>
+
+          <div class="view" id="registeredView">
+            <header class="app-header">
+              <div>
+                <h2>Registered</h2>
+                <p>New plant added</p>
+              </div>
+              <button class="icon-button" onclick="showView('homeView')">×</button>
+            </header>
+
+            <div class="content">
+              <section class="registered-card">
+                <div class="check-mark">✓</div>
+                <h3>Basil</h3>
+                <p>Seed Capsule · Herb<br />QR 정보를 기반으로 식물과 센서 프로필이 생성되었습니다.</p>
+
+                <div class="info-grid">
+                  <div class="info-row">
+                    <span>Recommended Moisture</span>
+                    <strong>45–65%</strong>
+                  </div>
+                  <div class="info-row">
+                    <span>Growth Period</span>
+                    <strong>5–10 days</strong>
+                  </div>
+                  <div class="info-row">
+                    <span>Temperature</span>
+                    <strong>18–26℃</strong>
+                  </div>
+                  <div class="info-row">
+                    <span>Difficulty</span>
+                    <strong>Easy</strong>
+                  </div>
+                </div>
+              </section>
+
+              <button class="primary-btn" onclick="selectPlant('basil')">View Plant Status</button>
+              <button class="secondary-btn" onclick="showView('scanView')">Add Another Plant</button>
+            </div>
+          </div>
+
+          <div class="view" id="detailView">
+            <header class="app-header">
+              <div>
+                <h2 id="detailTitle">Basil</h2>
+                <p>Sensor connected · Updated now</p>
+              </div>
+              <button class="icon-button" onclick="showView('homeView')">←</button>
+            </header>
+
+            <div class="content">
+              <section class="plant-hero-card">
+                <img id="detailImage" class="plant-hero-img" src="assets/basil-status.png" alt="Basil plant in a smart pot" />
+                <div class="plant-hero-info">
+                  <div>
+                    <h3 id="detailName">Basil</h3>
+                    <p id="detailMeta">Seed Capsule · Herb<br />Connected smart soil sensor</p>
+                  </div>
+                  <div class="plant-hero-status" id="detailHeroStatus">Optimal</div>
+                </div>
+              </section>
+
+              <section class="gauge-card">
+                <div class="status-pill" id="detailStatusPill" style="width: fit-content; margin: 0 auto 8px;">Optimal</div>
+                <div class="gauge" id="detailGauge">
+                  <div class="gauge-inner">
+                    <strong id="detailMoisture">58%</strong>
+                    <span>Soil Moisture</span>
+                  </div>
+                </div>
+                <p id="detailSummary" style="font-size: 13px; color: var(--gray-500); line-height: 1.55;">
+                  현재 토양 수분은 권장 범위 안에 있습니다.
+                </p>
+              </section>
+
+              <div class="detail-grid">
+                <div class="data-card">
+                  <small>Temperature</small>
+                  <strong id="detailTemp">23℃</strong>
+                </div>
+                <div class="data-card">
+                  <small>Humidity</small>
+                  <strong id="detailHumidity">46%</strong>
+                </div>
+                <div class="data-card">
+                  <small>Light Level</small>
+                  <strong id="detailLight">72%</strong>
+                </div>
+                <div class="data-card">
+                  <small>Water Tank</small>
+                  <strong id="detailTank">64%</strong>
+                </div>
+              </div>
+
+              <section class="message-card">
+                <h4>Care Message</h4>
+                <p id="detailMessage">지금은 물을 주지 않아도 됩니다. 햇빛이 드는 창가 근처에 두면 안정적으로 성장할 수 있습니다.</p>
+              </section>
+            </div>
+          </div>
+
+          <div class="view" id="historyView">
+            <header class="app-header">
+              <div>
+                <h2>History</h2>
+                <p>Last 7 days</p>
+              </div>
+              <button class="icon-button" onclick="showView('homeView')">←</button>
+            </header>
+
+            <div class="content">
+              <section class="chart-card">
+                <div class="chart-head">
+                  <div>
+                    <h3>Soil Moisture</h3>
+                    <span>Basil · Weekly data</span>
+                  </div>
+                  <strong>58%</strong>
+                </div>
+                <div class="line-chart">
+                  <svg viewBox="0 0 280 160" preserveAspectRatio="none">
+                    <line x1="0" y1="40" x2="280" y2="40" stroke="#ddddda" stroke-width="1" />
+                    <line x1="0" y1="80" x2="280" y2="80" stroke="#ddddda" stroke-width="1" />
+                    <line x1="0" y1="120" x2="280" y2="120" stroke="#ddddda" stroke-width="1" />
+                    <polyline fill="none" stroke="#1f1f1f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="0,102 46,88 92,96 138,62 184,70 230,54 280,66" />
+                    <circle cx="280" cy="66" r="5" fill="#1f1f1f" />
+                  </svg>
+                </div>
+                <div class="chart-days">
+                  <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                </div>
+              </section>
+
+              <div class="section-title">Watering Log</div>
+              <div class="log-list">
+                <div class="log-item">
+                  <div>Manual watering<span>June 02 · 08:40</span></div>
+                  <strong>80ml</strong>
+                </div>
+                <div class="log-item">
+                  <div>Auto watering<span>May 31 · 09:12</span></div>
+                  <strong>100ml</strong>
+                </div>
+                <div class="log-item">
+                  <div>Auto watering<span>May 28 · 08:56</span></div>
+                  <strong>120ml</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <nav class="bottom-nav">
+            <button class="nav-item active" onclick="showView('homeView', this)">
+              <span class="nav-icon">⌂</span><span>Home</span>
+            </button>
+            <button class="nav-item" onclick="showView('scanView', this)">
+              <span class="nav-icon">⌗</span><span>Scan</span>
+            </button>
+            <button class="nav-item" onclick="selectPlant(currentPlantId, this)">
+              <span class="nav-icon">◌</span><span>Status</span>
+            </button>
+            <button class="nav-item" onclick="showView('historyView', this)">
+              <span class="nav-icon">⌁</span><span>History</span>
+            </button>
+          </nav>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let currentPlantId = 'basil';
+
+    function makePlantImage(title, bg, pot, stem, bloom, accent) {
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420">
+          <rect width="640" height="420" fill="${bg}"/>
+          <circle cx="110" cy="80" r="46" fill="${accent}" opacity="0.18"/>
+          <circle cx="540" cy="116" r="72" fill="${accent}" opacity="0.13"/>
+          <path d="M0 330 C120 294 230 354 336 322 C454 286 548 314 640 276 L640 420 L0 420 Z" fill="#f4f0e8"/>
+          <path d="M228 252 H412 L386 374 H254 Z" fill="${pot}"/>
+          <path d="M242 250 H398 C406 250 412 256 412 264 V276 H228 V264 C228 256 234 250 242 250 Z" fill="#ffffff" opacity="0.8"/>
+          <path d="M320 256 C318 216 318 174 320 132" fill="none" stroke="${stem}" stroke-width="10" stroke-linecap="round"/>
+          <path d="M320 206 C284 178 256 176 224 198 C264 224 292 226 320 206 Z" fill="${stem}" opacity="0.82"/>
+          <path d="M322 196 C366 156 406 156 438 184 C392 216 356 218 322 196 Z" fill="${stem}" opacity="0.9"/>
+          <path d="M318 162 C292 132 262 122 230 136 C258 166 286 178 318 162 Z" fill="${stem}" opacity="0.74"/>
+          <path d="M322 146 C358 112 396 106 430 126 C394 160 356 170 322 146 Z" fill="${stem}" opacity="0.82"/>
+          <g transform="translate(320 110)">
+            <circle cx="0" cy="0" r="20" fill="${bloom}"/>
+            <circle cx="-28" cy="0" r="22" fill="${bloom}" opacity="0.9"/>
+            <circle cx="28" cy="0" r="22" fill="${bloom}" opacity="0.9"/>
+            <circle cx="0" cy="-28" r="22" fill="${bloom}" opacity="0.9"/>
+            <circle cx="0" cy="28" r="22" fill="${bloom}" opacity="0.9"/>
+            <circle cx="0" cy="0" r="13" fill="#f1c85b"/>
+          </g>
+          <text x="40" y="70" fill="#1f1f1f" font-family="Arial, sans-serif" font-size="34" font-weight="700">${title}</text>
+        </svg>`;
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+    }
+
+    const plantData = {
+      basil: {
+        name: 'Basil',
+        meta: 'Seed Capsule · Herb<br />Connected smart soil sensor',
+        status: 'Optimal',
+        statusColor: 'var(--green)',
+        moisture: 58,
+        temp: '23℃',
+        humidity: '46%',
+        light: '72%',
+        tank: '64%',
+        summary: '현재 토양 수분은 권장 범위 안에 있습니다.',
+        message: '지금은 물을 주지 않아도 됩니다. 햇빛이 드는 창가 근처에 두면 안정적으로 성장할 수 있습니다.',
+        image: 'assets/basil-status.png'
+      },
+      cosmos: {
+        name: 'Cosmos',
+        meta: 'Seed Capsule · Flower<br />Connected smart soil sensor',
+        status: 'Dry',
+        statusColor: 'var(--orange)',
+        moisture: 31,
+        temp: '24℃',
+        humidity: '41%',
+        light: '86%',
+        tank: '48%',
+        summary: '토양 수분이 낮습니다. 코스모스에 물을 보충해 주세요.',
+        message: '코스모스는 현재 건조 상태입니다. 흙 표면이 충분히 젖을 정도로 물을 주고, 밝은 위치를 유지해 주세요.',
+        image: 'assets/cosmos-status.png'
+      },
+      ivy: {
+        name: 'Ivy',
+        meta: 'Seed Capsule · Vine<br />Connected smart soil sensor',
+        status: 'Optimal',
+        statusColor: 'var(--green)',
+        moisture: 55,
+        temp: '22℃',
+        humidity: '49%',
+        light: '58%',
+        tank: '70%',
+        summary: '현재 토양 수분은 아이비가 자라기 좋은 범위 안에 있습니다.',
+        message: '아이비는 흙이 살짝 촉촉한 상태를 좋아합니다. 직사광선은 피하고 밝은 간접광이 드는 곳에 두면 안정적으로 성장합니다.',
+        image: 'assets/ivy-status.png'
+      }
+    };
+
+    function selectPlant(plantId = currentPlantId, navEl) {
+      const plant = plantData[plantId] || plantData.basil;
+      currentPlantId = plantId;
+
+      document.getElementById('detailTitle').textContent = plant.name;
+      document.getElementById('detailName').textContent = plant.name;
+      document.getElementById('detailMeta').innerHTML = plant.meta;
+      document.getElementById('detailImage').src = plant.image;
+      document.getElementById('detailImage').alt = `${plant.name} plant in a smart pot`;
+      document.getElementById('detailHeroStatus').textContent = plant.status;
+      document.getElementById('detailHeroStatus').style.color = plant.statusColor;
+      document.getElementById('detailStatusPill').textContent = plant.status;
+      document.getElementById('detailMoisture').textContent = `${plant.moisture}%`;
+      document.getElementById('detailGauge').style.background =
+        `conic-gradient(${plant.statusColor} 0deg ${plant.moisture * 3.6}deg, #e2e2df ${plant.moisture * 3.6}deg 360deg)`;
+      document.getElementById('detailSummary').textContent = plant.summary;
+      document.getElementById('detailTemp').textContent = plant.temp;
+      document.getElementById('detailHumidity').textContent = plant.humidity;
+      document.getElementById('detailLight').textContent = plant.light;
+      document.getElementById('detailTank').textContent = plant.tank;
+      document.getElementById('detailMessage').textContent = plant.message;
+
+      showView('detailView', navEl);
+    }
+
+    function showView(viewId, navEl) {
+      const views = document.querySelectorAll('.view');
+      views.forEach(view => view.classList.remove('active'));
+      document.getElementById(viewId).classList.add('active');
+
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => item.classList.remove('active'));
+
+      if (navEl) {
+        navEl.classList.add('active');
+        return;
+      }
+
+      const map = {
+        homeView: 0,
+        scanView: 1,
+        detailView: 2,
+        historyView: 3
+      };
+      if (map[viewId] !== undefined) {
+        navItems[map[viewId]].classList.add('active');
+      }
+    }
+  
+window.addEventListener('load', () => {
+  const params = new URLSearchParams(window.location.search);
+  const plant = params.get('plant');
+
+  if (plant && plantData[plant]) {
+    currentPlantId = plant;
+    selectPlant(plant);
+  }
+});
+
+</script>
+</body>
+</html>
